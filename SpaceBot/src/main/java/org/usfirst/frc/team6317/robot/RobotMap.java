@@ -40,8 +40,8 @@ public class RobotMap {
 	public static final class Sensors {
 		public static final int LINE_FOLLOWER = 9;
 		public static final int MANTIS_SWITCH = 8;
-		public static final int[] MANTIS_ENC_OTHER_MID = {2,3};
-		public static final int[] MANTIS_ENC_MID = {4,5};
-		public static final int[] MANTIC_ENC_BACK = {6,7};
+		// public static final int[] MANTIS_ENC_OTHER_MID = {2,3};
+		// public static final int[] MANTIS_ENC_MID = {4,5};
+		// public static final int[] MANTIC_ENC_BACK = {6,7};
 	}
 }

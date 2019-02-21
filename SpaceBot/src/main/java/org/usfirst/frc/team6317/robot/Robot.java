@@ -151,8 +151,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() { 
 		SmartDashboard.putBoolean("Is Lifting", driveSystem.lifting);
-		SmartDashboard.putNumber("MID ENCODER", mantisArms.getMidEnc());
-		SmartDashboard.putNumber("BACK ENCODER", mantisArms.getBackEnc());
+		// SmartDashboard.putNumber("MID ENCODER", mantisArms.getMidEnc());
+		// SmartDashboard.putNumber("BACK ENCODER", mantisArms.getBackEnc());
 		// SmartDashboard.putNumber("OTHER MID ENCODER", mantisArms.getOtherMidEnc());
 		SmartDashboard.putBoolean("Line Follower", sensorSystem.getCenterFollower());
 	//	 SmartDashboard.putString("Camera Value", CameraServer.getInstance().toString());
