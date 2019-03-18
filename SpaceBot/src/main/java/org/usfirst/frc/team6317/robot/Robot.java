@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team6317.robot;
 
+import javax.naming.spi.NamingManager;
+
+import org.usfirst.frc.team6317.robot.commands.LiftPositions;
 import org.usfirst.frc.team6317.robot.commands.RunHour;
 import org.usfirst.frc.team6317.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team6317.robot.subsystems.LiftSubsystem;
@@ -14,8 +17,8 @@ import org.usfirst.frc.team6317.robot.subsystems.MantisSubsystem;
 import org.usfirst.frc.team6317.robot.subsystems.SensorSubsystem;
 import org.usfirst.frc.team6317.robot.subsystems.SolenoidSubsystem;
 
- //import edu.wpi.cscore.UsbCamera;
- //import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 // import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,12 +41,14 @@ public class Robot extends TimedRobot {
 	public static final MantisSubsystem mantisArms = new MantisSubsystem();
 	public static OI m_oi;
 
+	public static boolean shouldCancel = false;
+
 //	public static int activeCamera = 1;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	// UsbCamera frontCamera;
+	UsbCamera frontCamera;
 	// UsbCamera backCamera;
 
 	/**
@@ -58,15 +63,15 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 
 		// Initializes the Cameras
-	//	 frontCamera = new UsbCamera("Front Camera",0);
-	//	 frontCamera.setResolution(400,280);
-	//	 frontCamera.setFPS(20);
+		// frontCamera = new UsbCamera("Front Camera",0);
+		// frontCamera.setResolution(400,280);
+		// frontCamera.setFPS(20);
 
 		// backCamera = new UsbCamera("Back Camera", 1);
 		// backCamera.setResolution(400,280);
 		// backCamera.setFPS(20);
 
-	//	 CameraServer.getInstance().startAutomaticCapture(frontCamera);
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -137,8 +142,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("seriously, this is not a joke. doge is in my nightmares.", 1);
+		// SmartDashboard.putNumber("seriously, this is not a joke. doge is in my nightmares.", 1);
 		SmartDashboard.putNumber("Lift Value", sensorSystem.liftEncoder.getDistance());
+		SmartDashboard.putNumber("Current Position", sensorSystem.currentLiftPos);
+		SmartDashboard.putNumber("Diff", LiftPositions.diff);
 	}
 
 	/**
@@ -150,11 +157,18 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotPeriodic() { 
-		SmartDashboard.putBoolean("Is Lifting", driveSystem.lifting);
-		// SmartDashboard.putNumber("MID ENCODER", mantisArms.getMidEnc());
-		// SmartDashboard.putNumber("BACK ENCODER", mantisArms.getBackEnc());
-		// SmartDashboard.putNumber("OTHER MID ENCODER", mantisArms.getOtherMidEnc());
-		SmartDashboard.putBoolean("Line Follower", sensorSystem.getCenterFollower());
+		// UNNEEDED DEBUGGING
+		// SmartDashboard.putBoolean("Is Lifting", driveSystem.lifting);
+		// SmartDashboard.putNumber("Drive", OI.driveStick.getY());
+		// SmartDashboard.putNumber("Controller POV", OI.driveStick.getPOV());
+		// SmartDashboard.putBoolean("Center Follow", sensorSystem.centerFollower.get());
+		// SmartDashboard.putBoolean("Left Follow", sensorSystem.leftFollower.get());
+		// SmartDashboard.putBoolean("Right Follow", sensorSystem.rightFollower.get());
+
+		SmartDashboard.putNumber("Heading", sensorSystem.getAngle());
+		SmartDashboard.putNumber("Absolute Heading", sensorSystem.getAngle() % 360);
+
+		
 	//	 SmartDashboard.putString("Camera Value", CameraServer.getInstance().toString());
 
 	//	 if (activeCamera == 0 && CameraServer.getInstance().toString() != "Front Camera") {
@@ -163,7 +177,7 @@ public class Robot extends TimedRobot {
 	//	 } else if (activeCamera == 1 && CameraServer.getInstance().toString() != "Back Camera") {
 	//	 	CameraServer.getInstance().removeCamera("Back Camera");
 	//	 	CameraServer.getInstance().startAutomaticCapture(frontCamera);
-		 }
+		//  }
 
 	}
-//}
+}

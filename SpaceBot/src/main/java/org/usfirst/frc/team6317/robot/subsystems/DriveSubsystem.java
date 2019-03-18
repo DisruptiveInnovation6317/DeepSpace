@@ -46,16 +46,46 @@ public class DriveSubsystem extends Subsystem {
 
 	}
 
+	public void turnRight() {
+		turnRight(0.5);
+	}
+
+	public void turnRight(double power) {
+		drive(-power,power);
+	}
+
+	public void turnLeft() {
+		turnLeft(0.5);
+	}
+
+	public void turnLeft(double power) {
+		drive(power,-power);
+	}
+
 	public void powerDrive(double speed) {
         mantisDrive.set(speed);
 	}
 	
 	public void strafeRight() {
-		mecanumDrive(0, 1, 0, 1);
+		strafeRight(1);
+	}
+
+	public void strafeRight(double power) {
+		fl.set(-power);
+		fr.set(power);
+		bl.set(power);
+		br.set(-power);
 	}
 
 	public void strafeLeft() {
-		mecanumDrive(0, -1, 0, 1);
+		strafeLeft(1);
+	}
+
+	public void strafeLeft(double power) {
+		fl.set(power);
+		fr.set(-power);
+		bl.set(-power);
+		br.set(power);
 	}
 	
 	public void mecanumDrive(double y, double x, double z, double throttle) {
