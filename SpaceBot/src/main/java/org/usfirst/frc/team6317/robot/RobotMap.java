@@ -45,5 +45,6 @@ public class RobotMap {
 		// public static final int[] MANTIS_ENC_OTHER_MID = {2,3};
 		// public static final int[] MANTIS_ENC_MID = {4,5};
 		// public static final int[] MANTIC_ENC_BACK = {6,7};
+		public static final int LIFT_BOTTOM_LIMIT = 5;
 	}
 }

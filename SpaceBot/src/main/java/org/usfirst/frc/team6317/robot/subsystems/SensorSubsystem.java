@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class SensorSubsystem extends Subsystem {
-	// public DigitalInput liftBottom = new DigitalInput(RobotMap.Sensors.LIFT_BOTTOM_LIMIT);
+	public DigitalInput liftBottom = new DigitalInput(RobotMap.Sensors.LIFT_BOTTOM_LIMIT);
 	public DigitalInput centerFollower = new DigitalInput(RobotMap.Sensors.CENTER_FOLLOWER);
 	public DigitalInput leftFollower = new DigitalInput(RobotMap.Sensors.LEFT_FOLLOWER);
 	public DigitalInput rightFollower = new DigitalInput(RobotMap.Sensors.RIGHT_FOLLOWER);

@@ -64,9 +64,9 @@ public class LiftPositions extends Command {
     protected boolean isFinished() {
         double liftEncoder = Robot.sensorSystem.liftEncoder.getDistance();
         if (encDiff > 0) // If encDiff is greater than 0 than that means finalPosition will be greater than the starting position
-            return atLevel || liftEncoder > finalPosition || Robot.shouldCancel;
+            return atLevel || liftEncoder > finalPosition;
         else // If encDiff is less than 0 than that means final Position will be less than the starting position
-            return atLevel || liftEncoder < finalPosition || Robot.shouldCancel;
+            return atLevel || liftEncoder < finalPosition;
     }
 
     @Override

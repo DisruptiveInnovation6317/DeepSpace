@@ -18,7 +18,9 @@ import org.usfirst.frc.team6317.robot.subsystems.SensorSubsystem;
 import org.usfirst.frc.team6317.robot.subsystems.SolenoidSubsystem;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Joystick;
 // import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -48,8 +50,13 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+	// Camera Stream Variables
 	UsbCamera frontCamera;
-	// UsbCamera backCamera;
+	UsbCamera backCamera;
+	VideoSink cameraStream;
+
+	// Camera Stream Control
+	boolean prevButton = true;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -64,14 +71,22 @@ public class Robot extends TimedRobot {
 
 		// Initializes the Cameras
 		// frontCamera = new UsbCamera("Front Camera",0);
-		// frontCamera.setResolution(400,280);
-		// frontCamera.setFPS(20);
 
 		// backCamera = new UsbCamera("Back Camera", 1);
-		// backCamera.setResolution(400,280);
-		// backCamera.setFPS(20);
 
-		CameraServer.getInstance().startAutomaticCapture();
+		// initializes switchable cameras
+		frontCamera = CameraServer.getInstance().startAutomaticCapture(0);
+		backCamera = CameraServer.getInstance().startAutomaticCapture(1);
+
+		frontCamera.setResolution(400,280);
+		frontCamera.setFPS(20);
+
+		backCamera.setResolution(400,280);
+		backCamera.setFPS(20);
+
+		cameraStream = CameraServer.getInstance().getServer();
+		cameraStream.setSource(frontCamera);
+		// CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
@@ -178,6 +193,15 @@ public class Robot extends TimedRobot {
 	//	 	CameraServer.getInstance().removeCamera("Back Camera");
 	//	 	CameraServer.getInstance().startAutomaticCapture(frontCamera);
 		//  }
+
+		// Code to switch the camera streams
+		if (OI.driveStick.getRawButton(11) && !prevButton) {
+			cameraStream.setSource(frontCamera);
+			prevButton = true;
+		} else if (OI.driveStick.getRawButton(12) && prevButton) {
+			cameraStream.setSource(backCamera);
+			prevButton = false;
+		}
 
 	}
 }

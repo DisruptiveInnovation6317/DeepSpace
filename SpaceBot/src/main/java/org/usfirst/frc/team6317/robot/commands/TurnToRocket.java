@@ -1,12 +1,12 @@
 package org.usfirst.frc.team6317.robot.commands;
 
-import javax.lang.model.util.ElementScanner6;
-
 import org.usfirst.frc.team6317.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TurnToRocket extends Command {
+
+    final double TURN_SPEED = 0.5;
 
     double angles[] = {28.75, 151.25, (360-151.25), (360-28.75)};
     double endPosition;
@@ -29,9 +29,9 @@ public class TurnToRocket extends Command {
         double heading = (Robot.sensorSystem.getAngle() + (360*50));
 
         if ((heading%360) < endPosition - 2) 
-            Robot.driveSystem.turnRight(0.25);
+            Robot.driveSystem.turnRight(TURN_SPEED);
         else if ((heading%360) > endPosition + 2)
-            Robot.driveSystem.turnLeft(0.25);
+            Robot.driveSystem.turnLeft(TURN_SPEED);
         else
             Robot.driveSystem.drive(0);
     }
