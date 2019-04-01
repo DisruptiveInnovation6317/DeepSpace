@@ -7,7 +7,7 @@ package org.usfirst.frc.team6317.robot.subsystems;
 // import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class MantisSubsystem extends Subsystem{
+public class MantisSubsystem extends Subsystem {
     // SpeedController otherMiddleMantis = new Victor(RobotMap.EndEffectors.OTHER_MID_MANTIS); //Seamer was here
     // SpeedController middleMantis = new Victor(RobotMap.EndEffectors.MID_MANTIS);
     // SpeedController backMantis = new Victor(RobotMap.EndEffectors.BACK_MANTIS);

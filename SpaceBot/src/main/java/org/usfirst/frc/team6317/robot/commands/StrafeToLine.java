@@ -25,14 +25,21 @@ public class StrafeToLine extends Command {
 
     @Override
     protected void execute() {
-        if (!Robot.sensorSystem.leftFollower.get())
+        if (!Robot.sensorSystem.leftFollower.get()){
             Robot.driveSystem.strafeLeft(1);
-        else if (!Robot.sensorSystem.rightFollower.get())
+            Robot.strafeDir = 'l';
+        } else if (!Robot.sensorSystem.rightFollower.get()){
             Robot.driveSystem.strafeRight(1);
+            Robot.strafeDir = 'r';
+        }
+            
     }
 
     @Override
     protected boolean isFinished() {
+        if (!Robot.sensorSystem.centerFollower.get()) {
+            Robot.strafeDir = 'c';
+        }
         return !Robot.sensorSystem.centerFollower.get() || Robot.shouldCancel;
     }
 

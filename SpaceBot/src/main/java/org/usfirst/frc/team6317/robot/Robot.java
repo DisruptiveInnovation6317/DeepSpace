@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team6317.robot;
 
-import javax.naming.spi.NamingManager;
-
 import org.usfirst.frc.team6317.robot.commands.LiftPositions;
 import org.usfirst.frc.team6317.robot.commands.RunHour;
 import org.usfirst.frc.team6317.robot.subsystems.DriveSubsystem;
@@ -20,7 +18,6 @@ import org.usfirst.frc.team6317.robot.subsystems.SolenoidSubsystem;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Joystick;
 // import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,6 +44,8 @@ public class Robot extends TimedRobot {
 
 //	public static int activeCamera = 1;
 
+	public static char strafeDir = 'n';
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -57,6 +56,9 @@ public class Robot extends TimedRobot {
 
 	// Camera Stream Control
 	boolean prevButton = true;
+
+	// Turning Stuffs
+	public static final double COMPENSATION = (360*100);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -180,9 +182,11 @@ public class Robot extends TimedRobot {
 		// SmartDashboard.putBoolean("Left Follow", sensorSystem.leftFollower.get());
 		// SmartDashboard.putBoolean("Right Follow", sensorSystem.rightFollower.get());
 
-		SmartDashboard.putNumber("Heading", sensorSystem.getAngle());
+		SmartDashboard.putNumber("Heading", (sensorSystem.getAngle()+COMPENSATION));
 		SmartDashboard.putNumber("Absolute Heading", sensorSystem.getAngle() % 360);
 
+		SmartDashboard.putNumber("Button",sensorSystem.testbutton.getVoltage());
+		SmartDashboard.putBoolean("Button",sensorSystem.liftBottom.get());
 		
 	//	 SmartDashboard.putString("Camera Value", CameraServer.getInstance().toString());
 

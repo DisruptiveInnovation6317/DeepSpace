@@ -7,13 +7,12 @@
 
 package org.usfirst.frc.team6317.robot;
 
-import org.usfirst.frc.team6317.robot.commands.CalibrateGyro;
 import org.usfirst.frc.team6317.robot.commands.CancelCommands;
 import org.usfirst.frc.team6317.robot.commands.LiftPositions;
-import org.usfirst.frc.team6317.robot.commands.LiftTill;
-import org.usfirst.frc.team6317.robot.commands.ShiftDrive;
+import org.usfirst.frc.team6317.robot.commands.LiftPositionsReversed;
 import org.usfirst.frc.team6317.robot.commands.SolenoidShift;
 import org.usfirst.frc.team6317.robot.commands.StrafeToLine;
+import org.usfirst.frc.team6317.robot.commands.TurnToHatch;
 import org.usfirst.frc.team6317.robot.commands.TurnToRocket;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -30,7 +29,7 @@ public class OI {
 	public static Joystick controlStick = new Joystick(2);
 
 	// Shifts Drive Modes
-	Button driveShift = new JoystickButton(driveStick, 1);
+	// Button driveShift = new JoystickButton(driveStick, 1);
 
 	// Shifts the solenoid cylinder up and down
 	Button shiftUp = new JoystickButton(controlStick,1);
@@ -41,6 +40,7 @@ public class OI {
 	Button toLineRight = new JoystickButton(driveStick, 6);
 
 	Button turning = new JoystickButton(driveStick, 3);
+	Button turnToLoading = new JoystickButton(driveStick, 1);
 	Button cancelStrafe = new JoystickButton(driveStick, 4);
 
 	// Lifts to specific heights
@@ -49,7 +49,6 @@ public class OI {
 	Button toOne = new JoystickButton(controlStick, 4);
 	Button toTwo = new JoystickButton(controlStick, 5);
 	Button cancel = new JoystickButton(controlStick, 6);
-
 
 	public OI() {
 		//baby seal mechanism
@@ -64,15 +63,24 @@ public class OI {
 		// delorean.whenPressed(new DeployMantis());
 
 		// Toggles Mantis Drives
-		driveShift.whenPressed(new ShiftDrive());
+		// driveShift.whenPressed(new ShiftDrive());
 		// testing.whenPressed(new RunFor(0.0005));
 
 		turning.whenPressed(new TurnToRocket());
+		turnToLoading.whenPressed(new TurnToHatch());
 		cancelStrafe.whenPressed(new CancelCommands());
 
+		// Drive Lift Logic
 		toZero.whenPressed(new LiftPositions(0));
 		toOne.whenPressed(new LiftPositions(1));
 		toTwo.whenPressed(new LiftPositions(2));
+
+		// Reversed Lift Logic
+		// toZero.whenPressed(new LiftPositionsReversed(0));
+		// toOne.whenPressed(new LiftPositionsReversed(1));
+		// toTwo.whenPressed(new LiftPositionsReversed(2));
+		
+		// Cancel Manuevers
 		cancel.whenPressed(new CancelCommands());
 		
 	}

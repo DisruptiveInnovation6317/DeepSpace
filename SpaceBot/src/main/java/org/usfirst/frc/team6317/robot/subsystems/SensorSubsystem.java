@@ -4,6 +4,7 @@ import org.usfirst.frc.team6317.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,6 +13,8 @@ public class SensorSubsystem extends Subsystem {
 	public DigitalInput centerFollower = new DigitalInput(RobotMap.Sensors.CENTER_FOLLOWER);
 	public DigitalInput leftFollower = new DigitalInput(RobotMap.Sensors.LEFT_FOLLOWER);
 	public DigitalInput rightFollower = new DigitalInput(RobotMap.Sensors.RIGHT_FOLLOWER);
+
+	public AnalogInput testbutton = new AnalogInput(0);
 
 	public Encoder liftEncoder = new Encoder(0, 1);
 	public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
