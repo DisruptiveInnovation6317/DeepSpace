@@ -58,9 +58,8 @@ And it's installed! Now anytime you can run the program on the robot!
 * **Dusty Beehler** - *Github Account* - [bqrichards](https://github.com/dbeehler)
 * **Billie Thompson** - *README.md Template* - [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/DisruptiveInnovation6317/DeepSpace/graphs/contributors) who participated in this project.
 
 ## Acknowledgments
 
-* Brandon Richards for the idea at 1:06 am on Monday, December 24, 2018
 * Billie Thompson for README.md Template
